@@ -230,7 +230,7 @@ const login = async () => {
     alert(response.data.message);
 
     if (response.status === 200) {
-      window.location.href = "/private-space"; // Redirection vers l'espace privé
+      window.location.href = "/dashboard"; // Redirection vers l'espace privé
     }
   } catch (error) {
     alert(error.response?.data?.message || "Une erreur est survenue");
@@ -300,12 +300,12 @@ v-checkbox input {
 
 
 .dark-mode {
-  background-color: #333;
+  background-color: #ece7e7;
   color: #ffffff;
 }
 
 .dark-mode .v-card {
-  background-color: #333;
+  background-color: #484747;
   color: #ffffff;
 }
 

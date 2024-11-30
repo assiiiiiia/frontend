@@ -1,30 +1,53 @@
 <template>
-  <v-app>
-       <!-- Conditionally render Navbar and Footer based on the route -->
-    <Navbar v-if="!isPrivateRoute" />
+  <div id="app">
+    <template v-if="isLoggedIn">
+     <HeaderView />
+      <router-view /> 
+      <SidebarView />
     
-    <router-view />
+        
+    </template>
+    <template v-else>
+      <Navbar />
+      <router-view /> 
+      <Footer />
+    </template>
     
-    <Footer v-if="!isPrivateRoute" />
-
-  </v-app>
-  
+  </div>
 </template>
 
 <script>
 import Footer from "./components/Footer.vue"
 import Navbar from "./components/Navbar.vue"
+import SidebarView  from "./components/sidebar/SidebarView.vue";
+import HeaderView from "./components/HeaderView.vue";
 
+import axios from 'axios';
 
 export default {
-  components: { Navbar, Footer },
-  computed: {
-    isPrivateRoute() {
-      // Check if the current route is 'private'
-      return this.$route.path === '/private-space';
-    }
+   components: { Navbar, Footer, SidebarView,HeaderView,},
+data() {
+    return {
+      isLoggedIn: false,
+      user: null,
+    };
+  },
+  created() {
+    this.checkAuthStatus();
+  },
+  methods: {
+    async checkAuthStatus() {
+      try {
+        const response = await axios.get('http://localhost:3000/auth/status', { withCredentials: true });
+        this.isLoggedIn = response.data.isLoggedIn;
+        this.user = response.data.user;
+      } catch (error) {
+        console.error("Erreur lors de la vérification de l'authentification :", error);
+      }
+    },
   },
   name: 'App',
+
 };
 </script>
 

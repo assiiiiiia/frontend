@@ -5,6 +5,9 @@ import ContactView from '../views/ContactView.vue';
 import LoginSignup from '@/views/LoginSignup.vue';
 import PrivateSpace from '@/components/PrivateSpace.vue'; // Nouveau fichier
 import UserTerms from '@/views/UserTerms.vue';
+import DashboardView from '@/views/DashboardView.vue';
+import AddView from '@/views/AddView.vue';
+import ProfilView from '@/views/ProfilView.vue';
 
 const routes = [
   {
@@ -40,6 +43,24 @@ const routes = [
    name: 'UserTerms',
    component: UserTerms,
    },
+   {
+    path: '/dashboard',
+    name: 'DashboardView',
+    component: DashboardView
+  },
+  
+  {
+    path: '/add',
+    name: 'AddView',
+    component: AddView, 
+  },
+  {
+    path: '/profil',
+    name: 'Profil',
+    component: ProfilView, 
+   
+  },
+ 
   ];
 
 
